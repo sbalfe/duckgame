@@ -25,9 +25,15 @@ public class Gun : NetworkBehaviour
         Debug.Log("test");
         if (IsServer && gunList.Count > 0)
         {
-            currentGunIndex.Value = 0;
-            GetComponent<SpriteRenderer>().sprite = gunList[currentGunIndex.Value].GunSprite;
+            InitialGunChangeServerRpc();
         }
+    }
+
+    [ServerRpc]
+    private void InitialGunChangeServerRpc()
+    {
+        currentGunIndex.Value = 0;
+        GetComponent<SpriteRenderer>().sprite = gunList[currentGunIndex.Value].GunSprite;
     }
 
     // Update is called once per frame
