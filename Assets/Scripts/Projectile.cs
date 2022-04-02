@@ -7,6 +7,7 @@ public class Projectile : NetworkBehaviour
 {
     [SerializeField] private float timeToLive = 5f;
     [SerializeField] private float projectileSpeed = 20f;
+    [SerializeField] private int damage = 5;
 
     private ulong shooterID;
     
@@ -14,6 +15,11 @@ public class Projectile : NetworkBehaviour
     {
         get => shooterID;
         set => shooterID = value;
+    }
+
+    public int Damage
+    {
+        get => damage;
     }
 
     public float ProjectileSpeed
