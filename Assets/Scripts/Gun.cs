@@ -6,7 +6,7 @@ using UnityEngine;
 public class Gun : NetworkBehaviour
 {
     [SerializeField] private List<GunSO> gunList;
-    NetworkVariable<int> currentGunIndex = new(0);
+    public NetworkVariable<int> currentGunIndex = new(0);
 
     private Camera camera;
 
