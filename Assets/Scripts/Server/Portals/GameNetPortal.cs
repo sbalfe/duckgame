@@ -73,8 +73,20 @@ namespace Server.Portals
         }
 
         /* Call to start a host and register the client message handlers*/
-        public void StartHost()
+        public async void StartHost()
         {
+            if (RelayManager.Instance.IsRelayEnabled)
+            {
+
+                await RelayManager.Instance.SetupRelay();
+                Debug.Log("relay setup");
+            }
+
+            if (NetworkManager.Singleton.StartHost())
+                Debug.Log("Started Host");
+            else
+                Debug.Log("Failed to Start Host");
+            
             NetworkManager.Singleton.StartHost();
 
             RegisterClientMessageHandlers();
