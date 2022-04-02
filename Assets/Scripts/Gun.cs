@@ -20,7 +20,7 @@ public class Gun : NetworkBehaviour
         camera = Camera.main;
     }
 
-    public void OnNetworkSpawn()
+    public override void OnNetworkSpawn()
     {
         Debug.Log("test");
         if (IsServer && gunList.Count > 0)
