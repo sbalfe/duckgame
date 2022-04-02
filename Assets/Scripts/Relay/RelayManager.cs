@@ -7,6 +7,7 @@ using Unity.Services.Core.Environments;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using UnityEngine;
+using shriller.game.singletons;
 
 public class RelayManager : Singleton<RelayManager>
 {
