@@ -30,6 +30,7 @@ public class TestRelayPortal : Singleton<TestRelayPortal>
         Debug.Log("started listenting");
    
         // START HOST
+        // ReSharper disable once Unity.NoNullPropagation
         startHostButton?.onClick.AddListener(async () =>
         {
 
