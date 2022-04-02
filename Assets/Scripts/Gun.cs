@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 
 public class Gun : NetworkBehaviour
@@ -9,7 +10,7 @@ public class Gun : NetworkBehaviour
     [SerializeField] private List<GunSO> gunList;
     public NetworkVariable<int> currentGunIndex = new(0);
 
-    private Camera camera;
+    private new Camera camera;
     private Vector2 aimDirection = Vector2.zero;
 
     private bool isFiring = false;
@@ -22,10 +23,11 @@ public class Gun : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        
-        if (IsServer && gunList.Count > 0)
+        Debug.Log("test");
+        if (gunList.Count > 0)
         {
             InitialGunChangeServerRpc();
+            GetComponent<SpriteRenderer>().sprite = gunList[currentGunIndex.Value].GunSprite;
         }
     }
 
@@ -52,7 +54,7 @@ public class Gun : NetworkBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 isFiring = true;
-                StartCoroutine("Fire");
+                StartCoroutine(Fire(aimDirection));
             }
 
             if (Input.GetMouseButtonUp(0))
@@ -63,30 +65,32 @@ public class Gun : NetworkBehaviour
         }
     }
 
-    IEnumerator Fire()
+    IEnumerator Fire(Vector2 aimDirection)
     {
         while (isFiring)
         {
-            FireServerRpc();
+            FireServerRpc(aimDirection);
             yield return new WaitForSeconds(gunList[currentGunIndex.Value].FireRate);
         }
     }
 
     [ServerRpc]
-    void FireServerRpc()
+    void FireServerRpc(Vector2 aimDirection)
     {
         // Get the projectile from the currently equipped gun
-        var projectile = gunList[currentGunIndex.Value].Projectile;
+        var projectilePrefab = gunList[currentGunIndex.Value].Projectile;
         
         // Set projectile offset in aim direction
         Quaternion projectileRotation = Quaternion.LookRotation(Vector3.forward, aimDirection);
         Vector2 spawnPoint = (Vector2) transform.position + (aimDirection * projectileSpawnOffset);
         
-        var obj = Instantiate(projectile, spawnPoint, projectileRotation);
+        var projectile = Instantiate(projectilePrefab, spawnPoint, projectileRotation);
         // Set direction (velocity multiplied in projectile script)
-        obj.GetComponent<Rigidbody2D>().velocity = aimDirection;
         // Set ID of shooter
-        obj.GetComponent<Projectile>().ShooterID = OwnerClientId;
-        obj.GetComponent<NetworkObject>().Spawn();
+        Debug.Log("here");
+        projectile.GetComponent<NetworkObject>().Spawn();
+        projectile.GetComponent<Projectile>().ShooterID = OwnerClientId;
+        Debug.Log(projectile.GetComponent<Projectile>().ProjectileSpeed);
+        projectile.GetComponent<Rigidbody2D>().velocity = aimDirection * projectile.GetComponent<Projectile>().ProjectileSpeed;
     }
 }

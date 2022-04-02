@@ -141,6 +141,7 @@ namespace Server.Portals
 
             /* When the server game portal is ready load the lobby*/
             NetworkManager.Singleton.SceneManager.LoadScene("Lobby", LoadSceneMode.Single);
+            Debug.Log(PlayerPrefs.GetString("joinCodeValue"));
 
             /* If we are the host*/
             if (NetworkManager.Singleton.IsHost)

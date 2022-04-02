@@ -37,8 +37,6 @@ public class GunPickup : NetworkBehaviour
     }
     private void OnCurrentGunIndexChanged(int oldValue, int newValue)
     {
-        if (!IsClient) return;
-
         m_Gun.GetComponent<SpriteRenderer>().sprite = m_GunSprites[m_Gun.currentGunIndex.Value];
     }
 
@@ -51,7 +49,6 @@ public class GunPickup : NetworkBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Collision Enter");
         if (collision.gameObject.CompareTag("Pickup"))
         {
             m_IsPickup = true;
@@ -72,7 +69,7 @@ public class GunPickup : NetworkBehaviour
 
     void Update()
     {
-        if (m_IsPickup)
+        if (m_IsPickup && IsOwner)
         {
             if (Input.GetKey(KeyCode.E))
             {
