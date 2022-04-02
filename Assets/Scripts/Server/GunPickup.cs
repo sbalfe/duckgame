@@ -17,7 +17,7 @@ public class GunPickup : NetworkBehaviour
 
     private void Awake()
     {
-        m_Gun = gameObject.AddComponent<Gun>();
+        m_Gun = gameObject.GetComponentInChildren<Gun>();
     }
 
     void Start()

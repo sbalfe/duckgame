@@ -97,8 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3969c1e24b0391d4b840ac82c91c5335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileSpawnOffset: 1
   gunList:
   - {fileID: 11400000, guid: b5c4e283398a3ef4fb1395dbfaeb907b, type: 2}
+  currentGunIndex:
+    m_InternalValue: 0
 --- !u!1 &6072259711416134337
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,6 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ac3a7146540d84c990089d7f6d2dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_GunSprites: []
 --- !u!61 &-8084921534672847923
 BoxCollider2D:
   m_ObjectHideFlags: 0
