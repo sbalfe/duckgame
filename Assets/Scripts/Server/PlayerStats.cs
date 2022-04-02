@@ -10,6 +10,8 @@ public class PlayerStats : NetworkBehaviour
 
     private NetworkVariable<int> health = new(100);
 
+    private Animator animator;
+
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,8 @@ public class PlayerStats : NetworkBehaviour
             Debug.Log("Adding CameraController");
             gameObject.AddComponent<CameraController>();
         }
+
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -26,16 +30,21 @@ public class PlayerStats : NetworkBehaviour
     {
         if (IsOwner)
         {
-            if (Input.GetAxis("Horizontal") != 0)
+            var horizontalInput = Input.GetAxis("Horizontal");
+            var verticalInput = Input.GetAxis("Vertical");
+            if (horizontalInput != 0)
             {
                 // TODO: Change to network transform
-                transform.Translate(new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed, 0, 0));
+                transform.Translate(new Vector3(horizontalInput * Time.deltaTime * moveSpeed, 0, 0));
             }
 
-            if (Input.GetAxis("Vertical") != 0)
+            if (verticalInput != 0)
             {
-                transform.Translate(new Vector3(0, Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed, 0));
+                transform.Translate(new Vector3(0, verticalInput * Time.deltaTime * moveSpeed, 0));
             }
+
+            animator.SetFloat("DirectionX", horizontalInput);
+            animator.SetFloat("DirectionY", verticalInput);
         }
     }
 
