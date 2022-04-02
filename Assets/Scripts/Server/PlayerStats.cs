@@ -1,17 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 // TODO:Change to network behaviour
-public class PlayerStats : MonoBehaviour
+public class PlayerStats : NetworkBehaviour
 {
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private int health = 100;
-    
-    // Start is called before the first frame update
-    void Start()
+
+    public override void OnNetworkSpawn()
     {
-        
+        if (IsOwner)
+        {
+            Debug.Log("Adding CameraController");
+            gameObject.AddComponent<CameraController>();
+        }
     }
 
     // Update is called once per frame
