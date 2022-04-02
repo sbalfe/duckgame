@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4b3d25e35413d647be1799f289bff13, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  gunName: 
-  projectile: {fileID: 0}
-  gunSprite: {fileID: 0}
+  gunName: Pistol
+  projectile: {fileID: 2642826691436696847, guid: e2659e4d4d5af54479d40d0d732a1ed8, type: 3}
+  gunSprite: {fileID: 21300000, guid: 23b33139e7bbbdf40bb4fd9c374cf84d, type: 3}
+  fireRate: 2
