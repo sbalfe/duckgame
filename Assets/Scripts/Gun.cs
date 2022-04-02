@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Gun : NetworkBehaviour
 {
+    [SerializeField] private float projectileSpawnOffset = 1f;
     [SerializeField] private List<GunSO> gunList;
     NetworkVariable<int> currentGunIndex = new(0);
 
@@ -37,15 +38,9 @@ public class Gun : NetworkBehaviour
                            transform.position;
             aimDirection.Normalize();
 
-            float aimAngle = Vector2.Angle(aimDirection, transform.up);
-            if (aimDirection.x < 0)
-            {
-                aimAngle = 360 - aimAngle;
-            }
-
-            Debug.Log(aimAngle);
-
-            transform.rotation = Quaternion.Euler(0, 0, aimAngle);
+            Vector3 mousePos = camera.ScreenToWorldPoint(Input.mousePosition);
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
+            
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -73,19 +68,14 @@ public class Gun : NetworkBehaviour
     [ServerRpc]
     void FireServerRpc()
     {
-        Event currentEvent = Event.current;
-        Vector2 mousePos = new Vector2();
-
-        // Get the mouse position from Event.
-        // Note that the y position from Event is inverted.
-
-        Vector2 aimDirection = camera.ScreenToWorldPoint(Input.mousePosition) -
-                               transform.position;
-        aimDirection.Normalize();
-
         // Get the projectile from the currently equipped gun
         var projectile = gunList[currentGunIndex.Value].Projectile;
-        var obj = Instantiate(projectile, transform.position, transform.rotation);
+        
+        // Set projectile offset in aim direction
+        Quaternion projectileRotation = Quaternion.LookRotation(Vector3.forward, aimDirection);
+        Vector2 spawnPoint = (Vector2) transform.position + (aimDirection * projectileSpawnOffset);
+        
+        var obj = Instantiate(projectile, spawnPoint, projectileRotation);
         // Set direction (velocity multiplied in projectile script)
         obj.GetComponent<Rigidbody2D>().velocity = aimDirection;
         // Set ID of shooter
