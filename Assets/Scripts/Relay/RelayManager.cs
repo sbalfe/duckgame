@@ -66,7 +66,7 @@ public class RelayManager : Singleton<RelayManager>
     public async Task<RelayJoinData> JoinRelay(string joinCode)
     {
 
-  
+        Debug.Log("join game");
         InitializationOptions options = new InitializationOptions()
             .SetEnvironmentName(environment);
 
@@ -83,12 +83,12 @@ public class RelayManager : Singleton<RelayManager>
         RelayJoinData relayJoinData = new RelayJoinData
         {
             Key = allocation.Key,
-            Port = (ushort)allocation.RelayServer.Port,ConnectionData,
-            HostConnectionData = allocation.HostConnectionData,
-            IPv4Address = allocation.RelayServer
+            Port = (ushort)allocation.RelayServer.Port,
             AllocationID = allocation.AllocationId,
             AllocationIDBytes = allocation.AllocationIdBytes,
-            ConnectionData = allocation..IpV4,
+            ConnectionData = allocation.ConnectionData,
+            HostConnectionData = allocation.HostConnectionData,
+            IPv4Address = allocation.RelayServer.IpV4,
             JoinCode = joinCode
         };
 
@@ -99,14 +99,3 @@ public class RelayManager : Singleton<RelayManager>
     }
 }
 
-10;
-
-    /* check to see if we have relay enabled before accessing it.*/
-    public bool IsRelayEnabled => Transport != null && Transport.Protocol == UnityTransport.ProtocolType.RelayUnityTransport;
-
-    /* obtain the unity transport object */
-    public UnityTransport Transport => NetworkManager.Singleton.gameObject.GetComponent<UnityTransport>();
-
-
-
-}
