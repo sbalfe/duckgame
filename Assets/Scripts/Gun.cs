@@ -23,9 +23,10 @@ public class Gun : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         Debug.Log("test");
-        if (IsServer && gunList.Count > 0)
+        if (gunList.Count > 0)
         {
             InitialGunChangeServerRpc();
+            GetComponent<SpriteRenderer>().sprite = gunList[currentGunIndex.Value].GunSprite;
         }
     }
 
