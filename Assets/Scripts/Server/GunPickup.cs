@@ -49,7 +49,6 @@ public class GunPickup : NetworkBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Collision Enter");
         if (collision.gameObject.CompareTag("Pickup"))
         {
             m_IsPickup = true;

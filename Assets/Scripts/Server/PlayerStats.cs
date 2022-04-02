@@ -28,7 +28,6 @@ public class PlayerStats : NetworkBehaviour
         {
             if (Input.GetAxis("Horizontal") != 0)
             {
-                //Debug.Log("press w");
                 // TODO: Change to network transform
                 transform.Translate(new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed, 0, 0));
             }

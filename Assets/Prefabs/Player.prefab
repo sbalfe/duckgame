@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7743656574523498656}
   - component: {fileID: 2952660142200405267}
   - component: {fileID: 6757290303172475158}
-  - component: {fileID: 6846870008665759605}
+  - component: {fileID: 358250282838675202}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -104,7 +104,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 74c23e2b04d54ea4fb5d10756c59d509, type: 2}
   currentGunIndex:
     m_InternalValue: 0
---- !u!114 &6846870008665759605
+--- !u!114 &358250282838675202
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,14 +113,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5269721231207291020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Script: {fileID: 11500000, guid: 54c9647dc784a46bca664910f182491e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SyncPositionX: 0
   SyncPositionY: 0
   SyncPositionZ: 0
-  SyncRotAngleX: 1
-  SyncRotAngleY: 1
+  SyncRotAngleX: 0
+  SyncRotAngleY: 0
   SyncRotAngleZ: 1
   SyncScaleX: 0
   SyncScaleY: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
-  InLocalSpace: 1
+  InLocalSpace: 0
   Interpolate: 1
   CanCommitToTransform: 0
 --- !u!1 &6072259711416134337
@@ -369,7 +369,7 @@ MonoBehaviour:
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
-  InLocalSpace: 0
+  InLocalSpace: 1
   Interpolate: 1
   CanCommitToTransform: 0
 --- !u!50 &-6796100365971545351

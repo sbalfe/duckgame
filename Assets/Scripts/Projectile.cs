@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Projectile : NetworkBehaviour
 {
+    [SerializeField] private float timeToLive = 5f;
     [SerializeField] private float projectileSpeed = 20f;
-    [SerializeField] private float timeToLive = 10f;
 
     private ulong shooterID;
     
@@ -16,9 +16,24 @@ public class Projectile : NetworkBehaviour
         set => shooterID = value;
     }
 
+    public float ProjectileSpeed
+    {
+        get => projectileSpeed;
+    }
+
     public override void OnNetworkSpawn()
     {
-        GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity * projectileSpeed;
+        if (IsOwner)
+        {
+            DestroyServerRpc();
+        }
+    }
+    
+    [ServerRpc]
+    public void DestroyServerRpc()
+    {
         Destroy(gameObject, timeToLive);
     }
+    
+    
 }
