@@ -100,6 +100,7 @@ MonoBehaviour:
   projectileSpawnOffset: 1
   gunList:
   - {fileID: 11400000, guid: b5c4e283398a3ef4fb1395dbfaeb907b, type: 2}
+  - {fileID: 11400000, guid: 74c23e2b04d54ea4fb5d10756c59d509, type: 2}
   currentGunIndex:
     m_InternalValue: 0
 --- !u!1 &6072259711416134337
@@ -268,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b8e18c686ff0b438e0449196430ed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 1
 --- !u!95 &7272073451645750384
 Animator:
   serializedVersion: 4
@@ -314,7 +315,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ac3a7146540d84c990089d7f6d2dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GunSprites: []
+  m_GunSprites:
+  - {fileID: 21300000, guid: 23b33139e7bbbdf40bb4fd9c374cf84d, type: 3}
+  - {fileID: 21300000, guid: a60720da1e7780949adadab90906980e, type: 3}
 --- !u!61 &-8084921534672847923
 BoxCollider2D:
   m_ObjectHideFlags: 0

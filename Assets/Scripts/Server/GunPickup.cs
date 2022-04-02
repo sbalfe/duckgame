@@ -13,7 +13,8 @@ public class GunPickup : NetworkBehaviour
     [SerializeField]
     private List<Sprite> m_GunSprites;
 
-    private int m_AvailableGunIndex = 0;
+    private int m_AvailableGunIndex;
+    private GameObject m_PickupObject;
 
     private void Awake()
     {
@@ -38,16 +39,14 @@ public class GunPickup : NetworkBehaviour
     {
         if (!IsClient) return;
 
-        //GetComponent<SpriteRenderer>().sprite = m_GunSprites[m_Gun.currentGunIndex.Value];
-        if (m_AvailableGunIndex == 0) GetComponent<SpriteRenderer>().color = Color.red;
-        if (m_AvailableGunIndex == 1) GetComponent<SpriteRenderer>().color = Color.green;
-
+        m_Gun.GetComponent<SpriteRenderer>().sprite = m_GunSprites[m_Gun.currentGunIndex.Value];
     }
 
     [ServerRpc]
     void UpdateCurrentGunIndexServerRpc(int newIndex)
     {
         m_Gun.currentGunIndex.Value = newIndex;
+        Destroy(m_PickupObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -55,8 +54,10 @@ public class GunPickup : NetworkBehaviour
         Debug.Log("Collision Enter");
         if (collision.gameObject.CompareTag("Pickup"))
         {
-            m_AvailableGunIndex = 1;
             m_IsPickup = true;
+            PickupIndex pickupIndex = collision.GetComponent<PickupIndex>();
+            m_PickupObject = collision.gameObject;
+            m_AvailableGunIndex = pickupIndex.AvailableGunIndex;
         }
     }
 
@@ -65,9 +66,7 @@ public class GunPickup : NetworkBehaviour
         Debug.Log("Collision Exit");
         if (collision.gameObject.CompareTag("Pickup"))
         {
-            m_AvailableGunIndex = 0;
-            UpdateCurrentGunIndexServerRpc(m_AvailableGunIndex);
-            m_IsPickup = true;
+            m_IsPickup = false;
         }
     }
 
