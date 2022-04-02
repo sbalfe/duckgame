@@ -1014,7 +1014,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 614014464}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11500000, guid: 52781c53da8dbf943bec4517abb4820f, type: 3}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &614014464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1099,6 +1111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 775deabd10cf1c140aa579dd6aa52731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxPlayers: 4
 --- !u!114 &989473328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1206,7 +1219,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1038356164}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1038356164
 MonoBehaviour:
   m_ObjectHideFlags: 0
