@@ -63,6 +63,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8452462450689336266, guid: c48c3ae3b0c9644448195103bc636637, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c48c3ae3b0c9644448195103bc636637, type: 3}
 --- !u!1 &6199753733138209666 stripped
@@ -70,6 +74,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5768070389301887019, guid: c48c3ae3b0c9644448195103bc636637, type: 3}
   m_PrefabInstance: {fileID: 433962229903334313}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &-4429263837276562145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6199753733138209666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f67b33ce48cc834eb6685c7eb1c19f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AvailableGunIndex: 0
 --- !u!114 &471043648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,16 +103,3 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &-4429263837276562145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6199753733138209666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f67b33ce48cc834eb6685c7eb1c19f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AvailableGunIndex: 0
