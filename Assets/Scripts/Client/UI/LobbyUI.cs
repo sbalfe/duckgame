@@ -1,9 +1,9 @@
-using DapperDino.UMT.Lobby.Networking;
+using Server.Portals;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Cl.UI
+namespace Client.UI
 {
     public class LobbyUI : NetworkBehaviour
     {
