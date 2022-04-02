@@ -49,6 +49,7 @@ namespace Server.Portals
         /* Ran when the object containing this script is created */
         private void Start()
         {
+          
             /* Obtain the Game Net Portal script */
             gameNetPortal = GetComponent<GameNetPortal>();
 
@@ -127,9 +128,11 @@ namespace Server.Portals
         /* When the game net portal has declared its started.*/
         private void HandleNetworkReadied()
         {
-
+            
             /* If we are not a server we cannot run this function thus return*/
             if (!NetworkManager.Singleton.IsServer) { return; }
+            
+            Debug.Log("handle network readied, loading the lobby");
 
             /* Connect the callbacks for the game net portal and network manager */
             gameNetPortal.OnUserDisconnectRequested += HandleUserDisconnectRequested;
@@ -137,7 +140,7 @@ namespace Server.Portals
             gameNetPortal.OnClientSceneChanged += HandleClientSceneChanged;
 
             /* When the server game portal is ready load the lobby*/
-            NetworkManager.Singleton.SceneManager.LoadScene("Scene_Lobby", LoadSceneMode.Single);
+            NetworkManager.Singleton.SceneManager.LoadScene("Lobby", LoadSceneMode.Single);
 
             /* If we are the host*/
             if (NetworkManager.Singleton.IsHost)
@@ -196,7 +199,7 @@ namespace Server.Portals
             ClearData();
 
             /* they go back to the main menu*/
-            SceneManager.LoadScene("Scene_Menu");
+            SceneManager.LoadScene("MainMenu");
         }
 
         private void HandleServerStarted()
@@ -205,8 +208,8 @@ namespace Server.Portals
             if (!NetworkManager.Singleton.IsHost) { return; }
 
             /* generate unique GUID and player name*/
-            string clientGuid = Guid.NewGuid().ToString();
-            string playerName = PlayerPrefs.GetString("PlayerName", "Missing Name");
+            var clientGuid = Guid.NewGuid().ToString();
+            var playerName = PlayerPrefs.GetString("PlayerName", "Missing Name");
 
             /* add to client data, link unique GUIDE to new instance of the player data and the ID of network in that */
             clientData.Add(clientGuid, new PlayerData(playerName, NetworkManager.Singleton.LocalClientId));
@@ -225,7 +228,9 @@ namespace Server.Portals
 
         private void ApprovalCheck(byte[] connectionData, ulong clientId, NetworkManager.ConnectionApprovedDelegate callback)
         {
-            Debug.Log("approval checker");
+           // Debug.Log("approval checker");
+           // Debug.Log("Cunt1");
+            
             /* Too much data has been sent*/
             if (connectionData.Length > MaxConnectionPayload)
             {
@@ -235,13 +240,16 @@ namespace Server.Portals
                 callback(false, 0, false, null, null);
                 return;
             }
-
+            //Debug.Log("Cunt2");
             /* if the clientID is the host , dont make a connection as its the server who should not spawn */
             if (clientId == NetworkManager.Singleton.LocalClientId)
             {
-                callback(true, null, true, null, null);
+                Debug.Log("Cunt4");
+                callback(false, null, true, null, null);
                 return;
             }
+            
+            Debug.Log("Cunt3");
 
             /* fetch the connection data as a string */
             var payload = Encoding.UTF8.GetString(connectionData);
@@ -255,19 +263,16 @@ namespace Server.Portals
             /* update more status values depending on the result of things.*/
             if (gameInProgress)
             {
-                Debug.Log("approval checker3");
                 gameReturnStatus = ConnectStatus.GameInProgress;
             }
             else if (clientData.Count >= maxPlayers)
             {
-                Debug.Log("approval checker4");
                 gameReturnStatus = ConnectStatus.ServerFull;
             }
 
             /* if connection was okay */
             if (gameReturnStatus == ConnectStatus.Success)
             {
-                Debug.Log("approval checker4");
                 /* assign the scene they wish to enter to which map they start in*/
                 clientSceneMap[clientId] = connectionPayload.clientScene;
 
@@ -278,9 +283,8 @@ namespace Server.Portals
                 clientData[connectionPayload.clientGUID] = new PlayerData(connectionPayload.playerName, clientId);
 
                 gameNetPortal.ServerToClientConnectResult(clientId, gameReturnStatus);
-                Debug.Log("approval checker5");
                 /* does not create any*/
-                SceneManager.LoadScene(0);
+                NetworkManager.Singleton.SceneManager.LoadScene("", LoadSceneMode.Single );
                 callback(true, null, true, null, null);
             }
             else

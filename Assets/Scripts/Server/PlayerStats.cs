@@ -14,30 +14,27 @@ public class PlayerStats : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (IsOwner)
-        {
-            Debug.Log("Adding CameraController");
-            gameObject.AddComponent<CameraController>();
-        }
+        Debug.Log("SHRGIDRHDRHJR");
+        if (!IsOwner) return;
+        Debug.Log("Adding CameraController");
+        gameObject.AddComponent<CameraController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (IsOwner)
+        if (!IsOwner) return;
+        
+        if (Input.GetAxis("Horizontal") != 0)
         {
-            Debug.Log("are we a host " + IsHost);
-            if (Input.GetAxis("Horizontal") != 0)
-            {
-                Debug.Log("press w");
-                // TODO: Change to network transform
-                transform.Translate(new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed, 0, 0));
-            }
+            Debug.Log("press w");
+            // TODO: Change to network transform
+            transform.Translate(new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed, 0, 0));
+        }
 
-            if (Input.GetAxis("Vertical") != 0)
-            {
-                transform.Translate(new Vector3(0, Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed, 0));
-            }
+        if (Input.GetAxis("Vertical") != 0)
+        {
+            transform.Translate(new Vector3(0, Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed, 0));
         }
     }
 
