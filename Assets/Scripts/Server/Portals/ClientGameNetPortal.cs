@@ -82,10 +82,7 @@ namespace Server.Portals
             /* attach this data to the network configuration*/
             NetworkManager.Singleton.NetworkConfig.ConnectionData = payloadBytes;
 
-            if ()
-            {
-                
-            }
+           
 
             /* start up a client instance*/
             NetworkManager.Singleton.StartClient();
