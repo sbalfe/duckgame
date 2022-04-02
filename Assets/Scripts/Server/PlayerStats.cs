@@ -4,15 +4,8 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-<<<<<<< Updated upstream:Assets/Scripts/Server/PlayerStats.cs
-// TODO:Change to network behaviour
-public class PlayerStats : NetworkBehaviour
-{
-    [SerializeField] private float moveSpeed = 1f;
-    [SerializeField] private int health = 100;
 
-    public override void OnNetworkSpawn()
-=======
+
 public class PlayerStats : NetworkBehaviour
 {
     [SerializeField] private float moveSpeed = 1f;
@@ -22,7 +15,6 @@ public class PlayerStats : NetworkBehaviour
 
     // Start is called before the first frame update
     void Start()
->>>>>>> Stashed changes:Assets/Scripts/PlayerStats.cs
     {
         if (IsOwner)
         {
