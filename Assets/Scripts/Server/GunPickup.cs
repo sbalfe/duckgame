@@ -37,8 +37,6 @@ public class GunPickup : NetworkBehaviour
     }
     private void OnCurrentGunIndexChanged(int oldValue, int newValue)
     {
-        //if (!IsClient) return;
-
         m_Gun.GetComponent<SpriteRenderer>().sprite = m_GunSprites[m_Gun.currentGunIndex.Value];
     }
 

@@ -26,10 +26,9 @@ public class PlayerStats : NetworkBehaviour
     {
         if (IsOwner)
         {
-            Debug.Log("are we a host " + IsHost);
             if (Input.GetAxis("Horizontal") != 0)
             {
-                Debug.Log("press w");
+                //Debug.Log("press w");
                 // TODO: Change to network transform
                 transform.Translate(new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed, 0, 0));
             }
