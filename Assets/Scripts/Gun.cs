@@ -9,6 +9,7 @@ public class Gun : NetworkBehaviour
     NetworkVariable<int> currentGunIndex = new(0);
 
     private Camera camera;
+    private Vector2 aimDirection = Vector2.zero;
 
     private bool isFiring = false;
     // Start is called before the first frame update
@@ -23,6 +24,7 @@ public class Gun : NetworkBehaviour
         if (IsServer && gunList.Count > 0)
         {
             currentGunIndex.Value = 0;
+            GetComponent<SpriteRenderer>().sprite = gunList[currentGunIndex.Value].GunSprite;
         }
     }
 
@@ -31,6 +33,20 @@ public class Gun : NetworkBehaviour
     {
         if (IsOwner)
         {
+            aimDirection = camera.ScreenToWorldPoint(Input.mousePosition) -
+                           transform.position;
+            aimDirection.Normalize();
+
+            float aimAngle = Vector2.Angle(aimDirection, transform.up);
+            if (aimDirection.x < 0)
+            {
+                aimAngle = 360 - aimAngle;
+            }
+
+            Debug.Log(aimAngle);
+
+            transform.rotation = Quaternion.Euler(0, 0, aimAngle);
+
             if (Input.GetMouseButtonDown(0))
             {
                 isFiring = true;
@@ -63,9 +79,9 @@ public class Gun : NetworkBehaviour
         // Get the mouse position from Event.
         // Note that the y position from Event is inverted.
 
-        var aimDirection = camera.ScreenToWorldPoint(Input.mousePosition) -
-                           transform.position;
-        aimDirection = aimDirection.normalized;
+        Vector2 aimDirection = camera.ScreenToWorldPoint(Input.mousePosition) -
+                               transform.position;
+        aimDirection.Normalize();
 
         // Get the projectile from the currently equipped gun
         var projectile = gunList[currentGunIndex.Value].Projectile;
