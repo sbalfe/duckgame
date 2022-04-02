@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace shriller.game.singletons
+namespace DilmerGames.Core.Singletons
 {
     public class Singleton<T> : MonoBehaviour
         where T : Component
