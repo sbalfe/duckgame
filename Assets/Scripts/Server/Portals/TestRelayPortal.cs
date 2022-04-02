@@ -15,7 +15,6 @@ public class TestRelayPortal : Singleton<TestRelayPortal>
     [SerializeField]
     private TMP_InputField joinCodeInput;
 
-    private bool hasServerStarted;
 
     private void Awake()
     {
@@ -28,6 +27,8 @@ public class TestRelayPortal : Singleton<TestRelayPortal>
 
     void Start()
     {
+        Debug.Log("started listenting");
+   
         // START HOST
         startHostButton?.onClick.AddListener(async () =>
         {
@@ -55,16 +56,7 @@ public class TestRelayPortal : Singleton<TestRelayPortal>
                 Debug.Log("test");
         });
 
-        // STATUS TYPE CALLBACKS
-        NetworkManager.Singleton.OnClientConnectedCallback += (id) =>
-        {
-
-        };
-
-        NetworkManager.Singleton.OnServerStarted += () =>
-        {
-            hasServerStarted = true;
-        };
-
+     
     }
+
 }
