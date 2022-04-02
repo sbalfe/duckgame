@@ -1,6 +1,5 @@
-
 using System.Threading.Tasks;
-using DilmerGames.Core.Singletons;
+using shriller.Core.Singletons;
 using Unity.Netcode;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
