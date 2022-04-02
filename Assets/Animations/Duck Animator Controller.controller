@@ -66,8 +66,8 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: DirectionX
     m_Mirror: 0
-  m_BlendParameter: DirectionX
-  m_BlendParameterY: DirectionY
+  m_BlendParameter: WalkDirectionX
+  m_BlendParameterY: WalkDirectionY
   m_MinThreshold: 0
   m_MaxThreshold: 0.75
   m_UseAutomaticThresholds: 1
@@ -104,13 +104,13 @@ AnimatorController:
   m_Name: Duck Animator Controller
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: DirectionX
+  - m_Name: WalkDirectionX
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: DirectionY
+  - m_Name: WalkDirectionY
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
