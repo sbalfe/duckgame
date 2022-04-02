@@ -27,7 +27,8 @@ public class TestRelayPortal : Singleton<TestRelayPortal>
     }
 
     void Start()
-    }
+    {
+        // START HOST
         startHostButton?.onClick.AddListener(async () =>
         {
 
@@ -53,6 +54,17 @@ public class TestRelayPortal : Singleton<TestRelayPortal>
             else
                 Debug.Log("test");
         });
+
+        // STATUS TYPE CALLBACKS
+        NetworkManager.Singleton.OnClientConnectedCallback += (id) =>
+        {
+
+        };
+
+        NetworkManager.Singleton.OnServerStarted += () =>
+        {
+            hasServerStarted = true;
+        };
 
     }
 }
