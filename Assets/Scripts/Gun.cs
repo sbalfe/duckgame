@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Gun : NetworkBehaviour
 {
+    [SerializeField] private ClientSoundController soundController;
     [SerializeField] private float projectileSpawnOffset = 1f;
     [SerializeField] private List<GunSO> gunList;
     public NetworkVariable<int> currentGunIndex = new(0);
@@ -41,9 +42,7 @@ public class Gun : NetworkBehaviour
     {
         if (IsOwner && camera)
         {
-            aimDirection = camera.ScreenToWorldPoint(Input.mousePosition) -
-                           transform.position;
-            aimDirection.Normalize();
+            
 
             Vector3 mousePos = camera.ScreenToWorldPoint(Input.mousePosition);
             transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
@@ -52,7 +51,7 @@ public class Gun : NetworkBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 isFiring = true;
-                StartCoroutine(Fire(aimDirection));
+                StartCoroutine(Fire());
             }
 
             if (Input.GetMouseButtonUp(0))
@@ -63,18 +62,28 @@ public class Gun : NetworkBehaviour
         }
     }
 
-    IEnumerator Fire(Vector2 aimDirection)
+    IEnumerator Fire()
     {
         while (isFiring)
         {
-            FireServerRpc(aimDirection);
-            yield return new WaitForSeconds(gunList[currentGunIndex.Value].FireRate);
+            soundController.PlaySoundClientRpc(gunList[currentGunIndex.Value].SoundIndex);
+            FireServerRpc();
+            yield return new WaitForSeconds(1 / gunList[currentGunIndex.Value].FireRate);
         }
     }
 
-    [ServerRpc]
-    void FireServerRpc(Vector2 aimDirection)
+    private Vector2 GetAimDirection()
     {
+        Vector2 aimDirection = camera.ScreenToWorldPoint(Input.mousePosition) -
+                       transform.position;
+        aimDirection.Normalize();
+        return aimDirection;
+    }
+
+    [ServerRpc]
+    void FireServerRpc()
+    {
+        var aimDirection = GetAimDirection();
         // Get the projectile from the currently equipped gun
         var projectile = gunList[currentGunIndex.Value].Projectile;
         

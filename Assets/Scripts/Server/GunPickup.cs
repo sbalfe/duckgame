@@ -12,6 +12,8 @@ public class GunPickup : NetworkBehaviour
 
     [SerializeField]
     private List<Sprite> m_GunSprites;
+    
+    [SerializeField] private ClientSoundController m_SoundController;
 
     private int m_AvailableGunIndex;
     private GameObject m_PickupObject;
@@ -67,6 +69,7 @@ public class GunPickup : NetworkBehaviour
         {
             if (Input.GetKey(KeyCode.E))
             {
+                m_SoundController.PlayLocalSound(2);
                 UpdateCurrentGunIndexServerRpc(m_AvailableGunIndex);
             }
         }
