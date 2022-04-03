@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3969c1e24b0391d4b840ac82c91c5335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpawnOffset: 0.1
+  projectileSpawnOffset: 0.2
   gunList:
   - {fileID: 11400000, guid: b5c4e283398a3ef4fb1395dbfaeb907b, type: 2}
   - {fileID: 11400000, guid: 74c23e2b04d54ea4fb5d10756c59d509, type: 2}
