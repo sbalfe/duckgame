@@ -52,28 +52,28 @@ public class Gun : NetworkBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 isFiring = true;
-                StartCoroutine("Fire");
+                StartCoroutine(Fire(aimDirection));
             }
 
             if (Input.GetMouseButtonUp(0))
             {
                 isFiring = false;
-                StopCoroutine("Fire");
+                StopAllCoroutines();
             }
         }
     }
 
-    IEnumerator Fire()
+    IEnumerator Fire(Vector2 aimDirection)
     {
         while (isFiring)
         {
-            FireServerRpc();
+            FireServerRpc(aimDirection);
             yield return new WaitForSeconds(gunList[currentGunIndex.Value].FireRate);
         }
     }
 
     [ServerRpc]
-    void FireServerRpc()
+    void FireServerRpc(Vector2 aimDirection)
     {
         // Get the projectile from the currently equipped gun
         var projectile = gunList[currentGunIndex.Value].Projectile;
