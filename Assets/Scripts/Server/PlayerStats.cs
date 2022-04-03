@@ -61,9 +61,12 @@ public class PlayerStats : NetworkBehaviour
         // If dead
         if (lifeState == false)
         {
-            // Kill player
+            PlayerPrefs.SetString("lifestate", "death");
+            NetworkManager.SceneManager.LoadScene("EG", LoadSceneMode.Single);
         }
     }
+
+   
 
     public void ReceiveHP(int HP)
     {
