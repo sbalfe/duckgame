@@ -279,6 +279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   m_NetworkHealthState: {fileID: 5816139541915836444}
+  soundController: {fileID: -8756802886823797053}
   m_CharacterVisualization: {fileID: 5620985712727509488}
 --- !u!95 &7272073451645750384
 Animator:
