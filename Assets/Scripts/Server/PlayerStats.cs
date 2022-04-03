@@ -20,6 +20,9 @@ public class PlayerStats : NetworkBehaviour
 
     private Animator animator;
 
+    [SerializeField]
+    private HealthBar m_HealthBar;
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +31,7 @@ public class PlayerStats : NetworkBehaviour
         {
             Debug.Log("Adding CameraController");
             gameObject.AddComponent<CameraController>();
+            m_HealthBar.setMaxHealth(NetworkHealth.BaseHP);
         }
 
         animator = GetComponent<Animator>();
@@ -74,6 +78,7 @@ public class PlayerStats : NetworkBehaviour
 
         // Stop health going below 0 and going above max health
         NetworkHealth.HitPoints = Mathf.Clamp(NetworkHealth.HitPoints, 0, NetworkHealth.BaseHP);
+        m_HealthBar.setHealth(NetworkHealth.HitPoints);
         Debug.Log(NetworkHealth.HitPoints);
     }
 
