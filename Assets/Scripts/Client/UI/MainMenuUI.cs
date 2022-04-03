@@ -12,11 +12,6 @@ namespace Client.UI
 
         [SerializeField] private TMP_InputField relayCodeInput;
 
-        [SerializeField] private Button hostButton;
-        
-        [SerializeField] private Button clientButton;
-        
-
         private void Start()
         {
             PlayerPrefs.GetString("PlayerName");
@@ -25,14 +20,13 @@ namespace Client.UI
         public void OnHostClicked()
         {
             PlayerPrefs.SetString("PlayerName", displayNameInputField.text);
-            Debug.Log("test");
             GameNetPortal.Instance.StartHost();
         }
 
         public void OnClientClicked()
         {
             PlayerPrefs.SetString("PlayerName", displayNameInputField.text);
-
+            PlayerPrefs.SetString("JoinCode", relayCodeInput.text);
             ClientGameNetPortal.Instance.StartClient();
         }
     }

@@ -1,14 +1,21 @@
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour
 {
     private CinemachineVirtualCamera m_MainCamera;
 
+    public CinemachineVirtualCamera GetCurrentCamera()
+    {
+        return m_MainCamera;
+    }
+
     void Start()
     {
-        AttachCamera();
+        if (SceneManager.GetActiveScene().name == "Game3")
+            AttachCamera();
     }
 
     private void AttachCamera()

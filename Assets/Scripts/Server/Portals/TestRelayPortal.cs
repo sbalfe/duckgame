@@ -34,7 +34,7 @@ public class TestRelayPortal : Singleton<TestRelayPortal>
         startHostButton?.onClick.AddListener(async () =>
         {
 
-            Debug.Log("cunt");
+          
             if (RelayManager.Instance.IsRelayEnabled)
                 await RelayManager.Instance.SetupRelay();
 
