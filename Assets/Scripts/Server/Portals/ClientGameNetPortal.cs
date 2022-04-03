@@ -111,7 +111,15 @@ namespace Server.Portals
                 gameNetPortal.OnUserDisconnectRequested += HandleUserDisconnectRequested;
             }
         }
-        
+
+        private void checkWin()
+        {
+            foreach (var item in NetworkManager.Singleton.ConnectedClients)
+            {
+                Debug.Log(item);
+            }
+        }
+
         private void HandleUserDisconnectRequested()
         {
             /* if user disconnects set disconnect reason*/

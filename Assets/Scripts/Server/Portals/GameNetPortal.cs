@@ -42,12 +42,17 @@ namespace Server.Portals
         /* When Game Net Portal starts script*/
         private void Start()
         {
-        
+
             /* On server started > attach the handlers*/
             NetworkManager.Singleton.OnServerStarted += HandleNetworkReady;
 
             /* Attach handlers for when the client joins*/
             NetworkManager.Singleton.OnClientConnectedCallback += HandleClientConnected;
+        }
+
+        private void displayWinner()
+        {
+            
         }
 
         /* When this script is destroyed*/
