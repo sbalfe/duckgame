@@ -60,6 +60,7 @@ public class RelayManager : Singleton<RelayManager>
 
 
         Debug.Log("game created. code: " + relayHostData.JoinCode);
+        PlayerPrefs.SetString("joinCodeValue", relayHostData.JoinCode);
         return relayHostData;
     }
 

@@ -1875,8 +1875,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayNameInputField: {fileID: 1912026571}
   relayCodeInput: {fileID: 375602680}
-  hostButton: {fileID: 0}
-  clientButton: {fileID: 0}
 --- !u!1 &1479364801
 GameObject:
   m_ObjectHideFlags: 0
