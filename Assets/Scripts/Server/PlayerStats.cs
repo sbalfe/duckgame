@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : NetworkBehaviour
 {
@@ -25,10 +26,23 @@ public class PlayerStats : NetworkBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        if (IsOwner)
+        SceneManager.activeSceneChanged += ChangedActiveScene;
+    }
+
+    private void ChangedActiveScene(Scene current, Scene next)
+    {
+        Debug.Log("scene changed");
+        string currentName = next.name;
+        Debug.Log("curr name" + currentName);
+
+        if (currentName == "Game3")
         {
-            Debug.Log("Adding CameraController");
-            gameObject.AddComponent<CameraController>();
+            if (IsOwner)
+            {
+                Debug.Log("Adding CameraController");
+                gameObject.AddComponent<CameraController>();
+                
+            }  
         }
     }
 

@@ -10,16 +10,16 @@ public class Gun : NetworkBehaviour
     [SerializeField] private List<GunSO> gunList;
     public NetworkVariable<int> currentGunIndex = new(0);
 
-    private Camera camera;
+    //private Camera camera;
     private Vector2 aimDirection = Vector2.zero;
 
     private bool isFiring = false;
     // Start is called before the first frame update
 
-    void Start()
+    /*void Start()
     {
         camera = Camera.main;
-    }
+    }*/
 
     public override void OnNetworkSpawn()
     {
@@ -40,11 +40,11 @@ public class Gun : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsOwner && camera)
+        if (IsOwner)
         {
-            
+            Debug.Log(Camera.main);   
 
-            Vector3 mousePos = camera.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
             
 
@@ -74,7 +74,7 @@ public class Gun : NetworkBehaviour
 
     private Vector2 GetAimDirection()
     {
-        Vector2 aimDirection = camera.ScreenToWorldPoint(Input.mousePosition) -
+        Vector2 aimDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) -
                        transform.position;
         aimDirection.Normalize();
         return aimDirection;
