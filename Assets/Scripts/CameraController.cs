@@ -7,6 +7,11 @@ public class CameraController : MonoBehaviour
 {
     private CinemachineVirtualCamera m_MainCamera;
 
+    public CinemachineVirtualCamera GetCurrentCamera()
+    {
+        return m_MainCamera;
+    }
+
     void Start()
     {
         if (SceneManager.GetActiveScene().name == "Game3")

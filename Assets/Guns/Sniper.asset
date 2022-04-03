@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4b3d25e35413d647be1799f289bff13, type: 3}
-  m_Name: Pistol
+  m_Name: Sniper
   m_EditorClassIdentifier: 
-  gunName: Pistol
+  gunName: Rifle
   projectile: {fileID: 2642826691436696847, guid: e2659e4d4d5af54479d40d0d732a1ed8, type: 3}
-  gunSprite: {fileID: 21300000, guid: 80ba6c48c50c8d0458d641afa69bcee0, type: 3}
-  fireRate: 4
-  soundIndex: 0
+  gunSprite: {fileID: 21300000, guid: 530f398845d1b674ca4a0807680ec083, type: 3}
+  fireRate: 20
+  soundIndex: 1

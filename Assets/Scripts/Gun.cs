@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Gun : NetworkBehaviour
 {
@@ -40,11 +42,10 @@ public class Gun : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsOwner)
+        if (IsOwner && SceneManager.GetActiveScene().name == "Game3")
         {
-            Debug.Log(Camera.main);   
-
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var camera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineBrain>().OutputCamera;
+            Vector3 mousePos = camera.ScreenToWorldPoint(Input.mousePosition);
             transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
             
 
@@ -66,24 +67,27 @@ public class Gun : NetworkBehaviour
     {
         while (isFiring)
         {
+            if (IsOwner)
+            {
             soundController.PlaySoundClientRpc(gunList[currentGunIndex.Value].SoundIndex);
-            FireServerRpc();
+            FireServerRpc(GetAimDirection());
             yield return new WaitForSeconds(1 / gunList[currentGunIndex.Value].FireRate);
+            }
         }
     }
 
     private Vector2 GetAimDirection()
     {
-        Vector2 aimDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) -
+        var camera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineBrain>().OutputCamera;
+        Vector2 aimDirection = camera.ScreenToWorldPoint(Input.mousePosition) -
                        transform.position;
         aimDirection.Normalize();
         return aimDirection;
     }
 
     [ServerRpc]
-    void FireServerRpc()
+    void FireServerRpc(Vector2 aimDirection)
     {
-        var aimDirection = GetAimDirection();
         // Get the projectile from the currently equipped gun
         var projectile = gunList[currentGunIndex.Value].Projectile;
         
