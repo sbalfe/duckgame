@@ -115,7 +115,7 @@ namespace Server.Portals
             gameInProgress = true;
 
             /* change scene to first scene all players load in */
-            NetworkManager.Singleton.SceneManager.LoadScene("Game2", LoadSceneMode.Single);
+            NetworkManager.Singleton.SceneManager.LoadScene("Game3", LoadSceneMode.Single);
         }
 
         /* End of game switch scene back to the lobby*/
