@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4b3d25e35413d647be1799f289bff13, type: 3}
   m_Name: Sniper
   m_EditorClassIdentifier: 
-  gunName: Rifle
+  gunName: Sniper
   projectile: {fileID: 2642826691436696847, guid: e2659e4d4d5af54479d40d0d732a1ed8, type: 3}
-  gunSprite: {fileID: 21300000, guid: 530f398845d1b674ca4a0807680ec083, type: 3}
-  fireRate: 20
+  gunSprite: {fileID: 21300000, guid: 41066624b3efd994db4003096d4dc6e4, type: 3}
+  fireRate: 1
   soundIndex: 1

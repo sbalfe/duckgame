@@ -45,9 +45,8 @@ public class Gun : NetworkBehaviour
         if (IsOwner && SceneManager.GetActiveScene().name == "Game3")
         {
             var camera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineBrain>().OutputCamera;
-            Vector3 mousePos = camera.ScreenToWorldPoint(Input.mousePosition);
-            transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
-            
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, GetAimDirection());
+
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -69,9 +68,8 @@ public class Gun : NetworkBehaviour
         {
             if (IsOwner)
             {
-            soundController.PlaySoundClientRpc(gunList[currentGunIndex.Value].SoundIndex);
-            FireServerRpc(GetAimDirection());
-            yield return new WaitForSeconds(1 / gunList[currentGunIndex.Value].FireRate);
+                FireServerRpc(GetAimDirection());
+                yield return new WaitForSeconds(1 / gunList[currentGunIndex.Value].FireRate);
             }
         }
     }
@@ -80,7 +78,7 @@ public class Gun : NetworkBehaviour
     {
         var camera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineBrain>().OutputCamera;
         Vector2 aimDirection = camera.ScreenToWorldPoint(Input.mousePosition) -
-                       transform.position;
+                               transform.position;
         aimDirection.Normalize();
         return aimDirection;
     }
@@ -88,13 +86,14 @@ public class Gun : NetworkBehaviour
     [ServerRpc]
     void FireServerRpc(Vector2 aimDirection)
     {
+        soundController.PlaySoundClientRpc(gunList[currentGunIndex.Value].SoundIndex);
         // Get the projectile from the currently equipped gun
         var projectile = gunList[currentGunIndex.Value].Projectile;
-        
+
         // Set projectile offset in aim direction
         Quaternion projectileRotation = Quaternion.LookRotation(Vector3.forward, aimDirection);
-        Vector2 spawnPoint = (Vector2) transform.position + (aimDirection * projectileSpawnOffset);
-        
+        Vector2 spawnPoint = (Vector2)transform.position + (aimDirection * projectileSpawnOffset);
+
         var obj = Instantiate(projectile, spawnPoint, projectileRotation);
         // Set direction (velocity multiplied in projectile script)
         obj.GetComponent<Rigidbody2D>().velocity = aimDirection;

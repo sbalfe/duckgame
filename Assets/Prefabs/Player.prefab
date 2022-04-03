@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7743656574523498656}
   - component: {fileID: 2952660142200405267}
   - component: {fileID: 6757290303172475158}
-  - component: {fileID: 6846870008665759605}
+  - component: {fileID: 2351525985124795385}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 402338011
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a60720da1e7780949adadab90906980e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 80ba6c48c50c8d0458d641afa69bcee0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 74c23e2b04d54ea4fb5d10756c59d509, type: 2}
   currentGunIndex:
     m_InternalValue: 0
---- !u!114 &6846870008665759605
+--- !u!114 &2351525985124795385
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5269721231207291020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Script: {fileID: 11500000, guid: 54c9647dc784a46bca664910f182491e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SyncPositionX: 0
@@ -325,8 +325,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_GunSprites:
-  - {fileID: 21300000, guid: 23b33139e7bbbdf40bb4fd9c374cf84d, type: 3}
-  - {fileID: 21300000, guid: a60720da1e7780949adadab90906980e, type: 3}
+  - {fileID: 21300000, guid: 80ba6c48c50c8d0458d641afa69bcee0, type: 3}
+  - {fileID: 21300000, guid: 530f398845d1b674ca4a0807680ec083, type: 3}
+  - {fileID: 21300000, guid: 41066624b3efd994db4003096d4dc6e4, type: 3}
   m_SoundController: {fileID: -8756802886823797053}
 --- !u!114 &-2023533140072301800
 MonoBehaviour:
@@ -402,19 +403,19 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6072259711416134337}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
+  m_Mass: 200
+  m_LinearDrag: 100
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &-236909571003220791
 MonoBehaviour:
   m_ObjectHideFlags: 0
