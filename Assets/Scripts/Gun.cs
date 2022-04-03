@@ -24,7 +24,6 @@ public class Gun : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        Debug.Log("test");
         if (gunList.Count > 0)
         {
             InitialGunChangeServerRpc();
@@ -42,7 +41,7 @@ public class Gun : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsOwner)
+        if (IsOwner && camera)
         {
             Vector3 mousePos = camera.ScreenToWorldPoint(Input.mousePosition);
             transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);

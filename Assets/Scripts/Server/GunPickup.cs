@@ -21,11 +21,6 @@ public class GunPickup : NetworkBehaviour
         m_Gun = gameObject.GetComponentInChildren<Gun>();
     }
 
-    void Start()
-    {
-        Debug.Log("Hello");
-    }
-
     private void OnEnable()
     {
         m_Gun.currentGunIndex.OnValueChanged += OnCurrentGunIndexChanged;
@@ -60,7 +55,6 @@ public class GunPickup : NetworkBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("Collision Exit");
         if (collision.gameObject.CompareTag("Pickup"))
         {
             m_IsPickup = false;
