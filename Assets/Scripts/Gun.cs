@@ -22,7 +22,6 @@ public class Gun : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        Debug.Log("test");
         if (gunList.Count > 0)
         {
             InitialGunChangeServerRpc();

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8254454331486855450}
   - component: {fileID: -6902527254256656852}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Kill Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

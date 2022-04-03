@@ -8,7 +8,15 @@ public class PlayerStats : NetworkBehaviour
 {
     [SerializeField] private float moveSpeed = 1f;
 
-    private NetworkVariable<int> health = new(100);
+    [SerializeField]
+    NetworkHealthState m_NetworkHealthState;
+
+    public NetworkHealthState NetworkHealth => m_NetworkHealthState;
+
+    [SerializeField]
+    private ClientCharacterVisualization m_CharacterVisualization;
+
+    public ClientCharacterVisualization CharacterVisualization => m_CharacterVisualization;
 
 
     // Start is called before the first frame update
@@ -18,6 +26,59 @@ public class PlayerStats : NetworkBehaviour
         {
             Debug.Log("Adding CameraController");
             gameObject.AddComponent<CameraController>();
+        }
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        NetworkHealth.IsAlive.OnValueChanged += OnLifeStateChanged;
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        NetworkHealth.IsAlive.OnValueChanged -= OnLifeStateChanged;
+    }
+
+    private void OnLifeStateChanged(bool prevLifeState, bool lifeState)
+    {
+        // If dead
+        if (lifeState == false)
+        {
+            // Kill player
+        }
+    }
+
+    public void ReceiveHP(int HP)
+    {
+
+        if (!IsServer) return;
+
+        // Receive Health
+        if (HP > 0)
+        {
+            NetworkHealth.HitPoints = NetworkHealth.HitPoints + HP;
+            Debug.Log("Receiving health");
+            // Do a health effect?
+        }
+        // Take damage
+        else
+        {
+            NetworkHealth.HitPoints = NetworkHealth.HitPoints + HP;
+            // Do a damage effect?
+            StartCoroutine(CharacterVisualization.TakeDamage());
+        }
+
+        // Stop health going below 0 and going above max health
+        NetworkHealth.HitPoints = Mathf.Clamp(NetworkHealth.HitPoints, 0, NetworkHealth.BaseHP);
+        Debug.Log(NetworkHealth.HitPoints);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            Debug.Log("Bullet hit");
+            ReceiveHP(-5);
         }
     }
 
@@ -37,17 +98,6 @@ public class PlayerStats : NetworkBehaviour
             {
                 transform.Translate(new Vector3(0, Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed, 0));
             }
-        }
-    }
-
-    [ServerRpc]
-    public void TakeDamageServerRpc(int damage)
-    {
-        health.Value -= damage;
-        if (health.Value <= 0)
-        {
-            // Die
-            GetComponent<SpriteRenderer>().color = Color.red;
         }
     }
 }

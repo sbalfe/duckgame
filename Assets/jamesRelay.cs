@@ -34,14 +34,10 @@ public class jamesRelay :Singleton<jamesRelay>
         startHostButton?.onClick.AddListener(async () =>
         {
 
-            Debug.Log("cunt");
             if (RelayManager.Instance.IsRelayEnabled)
                 await RelayManager.Instance.SetupRelay();
 
-            if (NetworkManager.Singleton.StartHost())
-                Debug.Log("test");
-            else
-                Debug.Log("test");
+            NetworkManager.Singleton.StartHost();
         });
 
 
