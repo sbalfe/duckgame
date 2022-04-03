@@ -187,7 +187,7 @@ namespace Client.UI
         /* when a new client connected, we pass in the lobby player state as a callback*/
         private void HandleLobbyPlayersStateChanged(NetworkListEvent<LobbyPlayerState> lobbyState)
         {
-            
+            Debug.Log("changed");
             /* update display for when new player joins*/
        
            

@@ -135,14 +135,14 @@ namespace Server.Portals
             
             Debug.Log("handle network readied, loading the lobby");
 
-            NetworkManager.Singleton.SceneManager.LoadScene("lobby", LoadSceneMode.Single);
             /* Connect the callbacks for the game net portal and network manager */
             gameNetPortal.OnUserDisconnectRequested += HandleUserDisconnectRequested;
             NetworkManager.Singleton.OnClientDisconnectCallback += HandleClientDisconnect;
             gameNetPortal.OnClientSceneChanged += HandleClientSceneChanged;
 
             /* When the server game portal is ready load the lobby*/
-            
+            NetworkManager.Singleton.SceneManager.LoadScene("Lobby", LoadSceneMode.Single);
+            Debug.Log(PlayerPrefs.GetString("joinCodeValue"));
 
             /* If we are the host*/
             if (NetworkManager.Singleton.IsHost)

@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        if (SceneManager.GetActiveScene().name == "Game2")
+        if (SceneManager.GetActiveScene().name == "Game3")
             AttachCamera();
     }
 
