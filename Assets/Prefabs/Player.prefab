@@ -327,6 +327,7 @@ MonoBehaviour:
   m_GunSprites:
   - {fileID: 21300000, guid: 23b33139e7bbbdf40bb4fd9c374cf84d, type: 3}
   - {fileID: 21300000, guid: a60720da1e7780949adadab90906980e, type: 3}
+  m_SoundController: {fileID: -8756802886823797053}
 --- !u!114 &-2023533140072301800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,6 +467,7 @@ MonoBehaviour:
   soundClips:
   - {fileID: 8300000, guid: 3d29a443ae4ea6f4385bba99e8d5c9fe, type: 3}
   - {fileID: 8300000, guid: 48acca3105cb2d84bb2ba227fc6bfd16, type: 3}
+  - {fileID: 8300000, guid: 09b3d979cb44c7c4b94f6e96bd855161, type: 3}
   audioSource: {fileID: 1741298584448515090}
 --- !u!82 &1741298584448515090
 AudioSource:
