@@ -39,7 +39,7 @@ public class Gun : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsOwner)
+        if (IsOwner && camera)
         {
             aimDirection = camera.ScreenToWorldPoint(Input.mousePosition) -
                            transform.position;

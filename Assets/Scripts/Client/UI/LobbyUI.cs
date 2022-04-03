@@ -1,4 +1,5 @@
 using Server.Portals;
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,11 +9,19 @@ namespace Client.UI
     public class LobbyUI : NetworkBehaviour
     {
         [Header("References")]
+        
+        /* Array storing each of the lobby player cards*/
         [SerializeField] private LobbyPlayerCard[] lobbyPlayerCards;
+        
+        /* Button to control the starting the game*/
         [SerializeField] private Button startGameButton;
 
+        /* Stores the players within the lobby in a specific state.*/
         private NetworkList<LobbyPlayerState> lobbyPlayers;
 
+        [SerializeField] private TMP_Text joinCode;
+
+        /* awake runs before spawn initial values */
         private void Awake()
         {
             lobbyPlayers = new NetworkList<LobbyPlayerState>();
@@ -21,14 +30,19 @@ namespace Client.UI
         /* When the lobby spawns*/
         public override void OnNetworkSpawn()
         {
+            
+            
+            /* If We are a client*/
             if (IsClient)
             {
                 /* new item added to the network list we attach the callback*/
                 lobbyPlayers.OnListChanged += HandleLobbyPlayersStateChanged;
             }
 
-            if (IsServer)
+            if (IsHost)
             {
+          
+                joinCode.text = PlayerPrefs.GetString("joinCodeValue");
                 startGameButton.gameObject.SetActive(true);
 
                 NetworkManager.Singleton.OnClientConnectedCallback += HandleClientConnected;
@@ -84,7 +98,11 @@ namespace Client.UI
             var playerData = ServerGameNetPortal.Instance.GetPlayerData(clientId);
 
             /* If this client id happens to have no data associated, then we return*/
-            if (!playerData.HasValue) { return; }
+            if (!playerData.HasValue)
+            {
+               
+                return;
+            }
 
             /* Add to the lobby players a new instantiation of the lobby player state, which essentially is a user.*/
             lobbyPlayers.Add(new LobbyPlayerState(
@@ -112,9 +130,11 @@ namespace Client.UI
         [ServerRpc(RequireOwnership = false)]
         private void ToggleReadyServerRpc(ServerRpcParams serverRpcParams = default)
         {
+           
             /* Go through our players */
             for (int i = 0; i < lobbyPlayers.Count; i++)
             {
+           
 
                 /* Locate which ID corresponds to the caller of this  */
                 if (lobbyPlayers[i].ClientId == serverRpcParams.Receive.SenderClientId)
@@ -132,11 +152,16 @@ namespace Client.UI
         [ServerRpc(RequireOwnership = false)]
         private void StartGameServerRpc(ServerRpcParams serverRpcParams = default)
         {
+            Debug.Log("start game RPC");
             /* If the sender is not the client host */
             if (serverRpcParams.Receive.SenderClientId != NetworkManager.Singleton.LocalClientId) { return; }
-
+            
+            
             /* checks if everyone has readied up */
-            if (!IsEveryoneReady()) { return; }
+            if (!IsEveryoneReady())
+            {
+                Debug.Log("network object");
+            }
 
             /* Start the game on the server */
             ServerGameNetPortal.Instance.StartGame();
@@ -150,6 +175,7 @@ namespace Client.UI
 
         public void OnReadyClicked()
         {
+           
             ToggleReadyServerRpc();
         }
 
@@ -158,14 +184,20 @@ namespace Client.UI
             StartGameServerRpc();
         }
 
-        /* when a new client connected*/
+        /* when a new client connected, we pass in the lobby player state as a callback*/
         private void HandleLobbyPlayersStateChanged(NetworkListEvent<LobbyPlayerState> lobbyState)
         {
+            
             /* update display for when new player joins*/
-            for (int i = 0; i < lobbyPlayerCards.Length; i++)
+       
+           
+            for (var i = 0; i < lobbyPlayerCards.Length; i++)
             {
+              
+                
                 if (lobbyPlayers.Count > i)
                 {
+                  
                     lobbyPlayerCards[i].UpdateDisplay(lobbyPlayers[i]);
                 }
                 else

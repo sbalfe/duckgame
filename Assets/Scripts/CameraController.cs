@@ -1,6 +1,7 @@
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour
 {
@@ -8,7 +9,8 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        AttachCamera();
+        if (SceneManager.GetActiveScene().name == "Game2")
+            AttachCamera();
     }
 
     private void AttachCamera()
