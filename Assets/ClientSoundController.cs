@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class ClientSoundController : MonoBehaviour
+public class ClientSoundController : NetworkBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] List<AudioClip> soundClips;
+    [SerializeField] AudioSource audioSource;
+
+    [ClientRpc]
+    public void PlaySoundClientRpc(int soundIndex)
     {
-        
+        if (soundIndex < soundClips.Count)
+        {
+            audioSource.PlayOneShot(soundClips[soundIndex]);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayLocalSound(int soundIndex)
     {
-        
+        if (soundIndex < soundClips.Count)
+        {
+            audioSource.PlayOneShot(soundClips[soundIndex]);
+        }
     }
 }
