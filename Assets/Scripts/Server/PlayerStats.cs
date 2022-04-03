@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,13 +20,13 @@ public class PlayerStats : NetworkBehaviour
 
     public ClientCharacterVisualization CharacterVisualization => m_CharacterVisualization;
 
-    private Animator animator;
+    private NetworkAnimator networkAnimator;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        networkAnimator = GetComponent<NetworkAnimator>();
         SceneManager.activeSceneChanged += ChangedActiveScene;
     }
 
@@ -109,6 +110,16 @@ public class PlayerStats : NetworkBehaviour
 
         var horizontalInput = Input.GetAxis("Horizontal");
         var verticalInput = Input.GetAxis("Vertical");
+
+        if (horizontalInput != 0 || verticalInput != 0)
+        {
+            networkAnimator.Animator.SetBool("Walking", true);
+        }
+        else
+        {
+            networkAnimator.Animator.SetBool("Walking", true);
+        }
+        
         if (horizontalInput != 0)
         {
             transform.Translate(new Vector3(horizontalInput * Time.deltaTime * moveSpeed, 0, 0));
@@ -118,8 +129,24 @@ public class PlayerStats : NetworkBehaviour
         {
             transform.Translate(new Vector3(0, verticalInput * Time.deltaTime * moveSpeed, 0));
         }
+        
+        SetAnimationParametersClientRpc(horizontalInput, verticalInput);
+        SetAnimationParametersServerRpc(horizontalInput, verticalInput);
+        networkAnimator.Animator.SetFloat("WalkDirectionX", horizontalInput);
+        networkAnimator.Animator.SetFloat("WalkDirectionY", verticalInput);
+    }
 
-        animator.SetFloat("WalkDirectionX", horizontalInput);
-        animator.SetFloat("WalkDirectionY", verticalInput);
+    [ClientRpc]
+    public void SetAnimationParametersClientRpc(float horizontalInput, float verticalInput)
+    {
+        networkAnimator.Animator.SetFloat("WalkDirectionX", horizontalInput);
+        networkAnimator.Animator.SetFloat("WalkDirectionY", verticalInput);
+    }
+    
+    [ServerRpc]
+    public void SetAnimationParametersServerRpc(float horizontalInput, float verticalInput)
+    {
+        networkAnimator.Animator.SetFloat("WalkDirectionX", horizontalInput);
+        networkAnimator.Animator.SetFloat("WalkDirectionY", verticalInput);
     }
 }
