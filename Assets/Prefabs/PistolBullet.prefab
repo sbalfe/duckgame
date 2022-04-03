@@ -93,9 +93,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 402338011
-  m_SortingLayer: 4
-  m_SortingOrder: 2
+  m_SortingLayerID: 1973609513
+  m_SortingLayer: 3
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8dc50b57b5b41db4298f33b72ae08e0a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -119,8 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b382b207e00bf42b70cf5022ef7789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 50
   timeToLive: 10
+  projectileSpeed: 20
+  damage: 5
 --- !u!70 &6709811322338047062
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -196,8 +197,8 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1973609513
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -278,7 +279,7 @@ MonoBehaviour:
   SyncScaleX: 1
   SyncScaleY: 1
   SyncScaleZ: 1
-  PositionThreshold: 0.001
+  PositionThreshold: 0
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
   InLocalSpace: 0

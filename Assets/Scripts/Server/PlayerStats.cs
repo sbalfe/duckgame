@@ -43,8 +43,8 @@ public class PlayerStats : NetworkBehaviour
                 transform.Translate(new Vector3(0, verticalInput * Time.deltaTime * moveSpeed, 0));
             }
 
-            animator.SetFloat("DirectionX", horizontalInput);
-            animator.SetFloat("DirectionY", verticalInput);
+            animator.SetFloat("WalkDirectionX", horizontalInput);
+            animator.SetFloat("WalkDirectionY", verticalInput);
         }
     }
 
