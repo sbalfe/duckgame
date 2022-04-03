@@ -81,8 +81,7 @@ namespace Server.Portals
             
             if (RelayManager.Instance.IsRelayEnabled)
             {
-
-                Debug.Log("relay");
+                
                 await RelayManager.Instance.SetupRelay();
             }
 

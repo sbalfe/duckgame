@@ -12,11 +12,6 @@ namespace Client.UI
 
         [SerializeField] private TMP_InputField relayCodeInput;
 
-        [SerializeField] private Button hostButton;
-        
-        [SerializeField] private Button clientButton;
-        
-
         private void Start()
         {
             PlayerPrefs.GetString("PlayerName");
