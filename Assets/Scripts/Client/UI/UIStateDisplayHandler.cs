@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
 public class UIStateDisplayHandler : NetworkBehaviour
 {
@@ -18,15 +19,18 @@ public class UIStateDisplayHandler : NetworkBehaviour
     [SerializeField]
     NetworkHealthState m_NetworkHealthState;
 
-    Camera m_Camera;
-
     Transform m_CanvasTransform;
 
-    void Start()
+    void Update()
     {
-        var camera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineBrain>().OutputCamera;
-        Debug.Log(camera);
-        Camera m_Camera = camera;
+
+        if (m_CanvasTransform != null) return;
+        
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+
+        if (sceneName != "Game3") return;
+
         var canvasGameObject = GameObject.FindWithTag("GameCanvas");
         if (canvasGameObject)
         {
@@ -35,9 +39,15 @@ public class UIStateDisplayHandler : NetworkBehaviour
 
         Assert.IsNotNull(m_NetworkHealthState, "A NetworkHealthState component needs to be attached!");
        
-        Assert.IsTrue(m_Camera != null && m_CanvasTransform != null);
+        Assert.IsTrue(m_CanvasTransform != null);
 
         DisplayUIHealth();
+    }
+
+    public void DisplayUIDeath()
+    {
+        m_UIState.HideHealth();
+        m_UIState.DisplayDeath();
     }
 
     void DisplayUIHealth()

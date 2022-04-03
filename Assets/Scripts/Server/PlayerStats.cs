@@ -22,6 +22,8 @@ public class PlayerStats : NetworkBehaviour
 
     private NetworkAnimator networkAnimator;
 
+    [SerializeField]
+    private UIStateDisplayHandler m_NetworkStateDisplayHandler;
 
     // Start is called before the first frame update
     void Start()
@@ -62,8 +64,12 @@ public class PlayerStats : NetworkBehaviour
         // If dead
         if (lifeState == false)
         {
-            PlayerPrefs.SetString("lifestate", "death");
-            NetworkManager.SceneManager.LoadScene("EG", LoadSceneMode.Single);
+            //SceneManager.LoadScene("EG", LoadSceneMode.Single);
+            CharacterVisualization.DeathFXClientRPC();
+            m_NetworkStateDisplayHandler.DisplayUIDeath();
+            // Disable collider
+            Collider2D m_Collider = GetComponent<Collider2D>();
+            m_Collider.enabled = false;
         }
     }
 
@@ -96,10 +102,12 @@ public class PlayerStats : NetworkBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (NetworkHealth.IsAlive.Value == false) return;
         if (collision.gameObject.CompareTag("Bullet"))
         {
             Debug.Log("Bullet hit");
             ReceiveHP(-5);
+            CharacterVisualization.TakeDamageFXClientRpc();
         }
     }
 
@@ -108,17 +116,10 @@ public class PlayerStats : NetworkBehaviour
     {
         if (!IsOwner) return;
 
+        if (!NetworkHealth.IsAlive.Value) return;
+
         var horizontalInput = Input.GetAxis("Horizontal");
         var verticalInput = Input.GetAxis("Vertical");
-
-        if (horizontalInput != 0 || verticalInput != 0)
-        {
-            networkAnimator.Animator.SetBool("Walking", true);
-        }
-        else
-        {
-            networkAnimator.Animator.SetBool("Walking", true);
-        }
         
         if (horizontalInput != 0)
         {

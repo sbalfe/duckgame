@@ -33,4 +33,10 @@ public class ClientCharacterVisualization : NetworkBehaviour
     {
         GetComponent<SpriteRenderer>().color = Color.white;
     }
+
+    [ClientRpc]
+    public void DeathFXClientRPC()
+    {
+        GetComponent<SpriteRenderer>().color = Color.red;
+    }
 }

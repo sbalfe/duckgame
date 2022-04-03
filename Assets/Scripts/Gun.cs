@@ -42,6 +42,10 @@ public class Gun : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        NetworkHealthState networkHealth = GetComponentInParent<NetworkHealthState>();
+        if (networkHealth.IsAlive.Value == false) return;
+
         if (IsOwner && SceneManager.GetActiveScene().name == "Game3")
         {
             var camera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineBrain>().OutputCamera;

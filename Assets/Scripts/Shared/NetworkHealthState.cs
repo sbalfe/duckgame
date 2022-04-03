@@ -42,9 +42,10 @@ public class NetworkHealthState : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership=false)]
     public void HitPointsDepletedServerRpc()
     {
+        Debug.Log("DEADl");
         m_IsAlive.Value = false;
     }
 }
