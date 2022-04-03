@@ -13,6 +13,8 @@ public class PlayerStats : NetworkBehaviour
     [SerializeField]
     NetworkHealthState m_NetworkHealthState;
 
+    [SerializeField] private ClientSoundController soundController;
+
     public NetworkHealthState NetworkHealth => m_NetworkHealthState;
 
     [SerializeField]
