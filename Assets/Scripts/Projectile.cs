@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -20,5 +21,11 @@ public class Projectile : NetworkBehaviour
     {
         GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity * projectileSpeed;
         Destroy(gameObject, timeToLive);
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        Destroy(gameObject, 0.2f);
     }
 }
