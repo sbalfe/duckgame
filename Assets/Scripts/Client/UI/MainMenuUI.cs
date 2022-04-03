@@ -25,14 +25,13 @@ namespace Client.UI
         public void OnHostClicked()
         {
             PlayerPrefs.SetString("PlayerName", displayNameInputField.text);
-            Debug.Log("test");
             GameNetPortal.Instance.StartHost();
         }
 
         public void OnClientClicked()
         {
             PlayerPrefs.SetString("PlayerName", displayNameInputField.text);
-
+            PlayerPrefs.SetString("JoinCode", relayCodeInput.text);
             ClientGameNetPortal.Instance.StartClient();
         }
     }

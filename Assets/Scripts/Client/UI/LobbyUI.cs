@@ -1,4 +1,5 @@
 using Server.Portals;
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,11 +9,19 @@ namespace Client.UI
     public class LobbyUI : NetworkBehaviour
     {
         [Header("References")]
+        
+        /* Array storing each of the lobby player cards*/
         [SerializeField] private LobbyPlayerCard[] lobbyPlayerCards;
+        
+        /* Button to control the starting the game*/
         [SerializeField] private Button startGameButton;
 
+        /* Stores the players within the lobby in a specific state.*/
         private NetworkList<LobbyPlayerState> lobbyPlayers;
 
+        [SerializeField] private TMP_Text joinCode;
+
+        /* awake runs before spawn initial values */
         private void Awake()
         {
             lobbyPlayers = new NetworkList<LobbyPlayerState>();
@@ -21,14 +30,19 @@ namespace Client.UI
         /* When the lobby spawns*/
         public override void OnNetworkSpawn()
         {
+            Debug.Log("tesfsdgds");
+            
+            /* If We are a client*/
             if (IsClient)
             {
                 /* new item added to the network list we attach the callback*/
                 lobbyPlayers.OnListChanged += HandleLobbyPlayersStateChanged;
             }
 
-            if (IsServer)
+            if (IsHost)
             {
+                Debug.Log("sjgifgmdrg");
+                joinCode.text = PlayerPrefs.GetString("joinCodeValue");
                 startGameButton.gameObject.SetActive(true);
 
                 NetworkManager.Singleton.OnClientConnectedCallback += HandleClientConnected;
@@ -158,12 +172,14 @@ namespace Client.UI
             StartGameServerRpc();
         }
 
-        /* when a new client connected*/
+        /* when a new client connected, we pass in the lobby player state as a callback*/
         private void HandleLobbyPlayersStateChanged(NetworkListEvent<LobbyPlayerState> lobbyState)
         {
+            Debug.Log("adding a player");
             /* update display for when new player joins*/
-            for (int i = 0; i < lobbyPlayerCards.Length; i++)
+            for (var i = 0; i < lobbyPlayerCards.Length; i++)
             {
+                Debug.Log(i);
                 if (lobbyPlayers.Count > i)
                 {
                     lobbyPlayerCards[i].UpdateDisplay(lobbyPlayers[i]);

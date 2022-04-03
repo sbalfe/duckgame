@@ -49,7 +49,7 @@ namespace Server.Portals
             NetworkManager.Singleton.OnClientDisconnectCallback += HandleClientDisconnect;
         }
 
-        /* When script destroy */
+        /* When script destroyed */
         private void OnDestroy()
         {
 
@@ -66,7 +66,7 @@ namespace Server.Portals
             NetworkManager.Singleton.OnClientDisconnectCallback -= HandleClientDisconnect;
         }
 
-        public void StartClient()
+        public async void StartClient()
         {
             /* Convert object instantiation to JSON*/
             var payload = JsonUtility.ToJson(new ConnectionPayload()
@@ -76,33 +76,41 @@ namespace Server.Portals
                 playerName = PlayerPrefs.GetString("PlayerName", "Missing Name")
             });
 
+            var joinCodeInput = PlayerPrefs.GetString("JoinCode");
+
             /* convert JSON to bytes */
-            byte[] payloadBytes = Encoding.UTF8.GetBytes(payload);
+            var payloadBytes = Encoding.UTF8.GetBytes(payload);
 
             /* attach this data to the network configuration*/
             NetworkManager.Singleton.NetworkConfig.ConnectionData = payloadBytes;
+            
+            if (RelayManager.Instance.IsRelayEnabled && !string.IsNullOrEmpty(joinCodeInput))
+                await RelayManager.Instance.JoinRelay(joinCodeInput);
 
-           
-
+            if (NetworkManager.Singleton.StartClient())
+                Debug.Log("test");
+            else
+                Debug.Log("test");
+            
             /* start up a client instance*/
             NetworkManager.Singleton.StartClient();
         }
 
-        /* handdler for when the game net portal responds and connects*/
+        /* handler for when the game net portal responds and connects*/
         private void HandleNetworkReadied()
         {
+            Debug.Log("the network has readied.");
             /* if we are a pure server*/
             if (!NetworkManager.Singleton.IsClient) { return; }
 
-            /* if we are a client*/
+            /* if we are a client */
             if (!NetworkManager.Singleton.IsHost)
             {
                 /* attach disconnect request handler*/
                 gameNetPortal.OnUserDisconnectRequested += HandleUserDisconnectRequested;
             }
         }
-
-
+        
         private void HandleUserDisconnectRequested()
         {
             /* if user disconnects set disconnect reason*/
@@ -114,13 +122,14 @@ namespace Server.Portals
             /* Pass this into the client disconnection */
             HandleClientDisconnect(NetworkManager.Singleton.LocalClientId);
 
-            /* load the main menu scen as they leave*/
+            /* load the main menu scene as they leave*/
             SceneManager.LoadScene("MainMenu");
         }
 
         /* When the user has already connected */
         private void HandleConnectionFinished(ConnectStatus status)
         {
+            Debug.Log("fucking cunt");
             /* if status is a failure, we submit a reason based on this*/
             if (status != ConnectStatus.Success)
             {

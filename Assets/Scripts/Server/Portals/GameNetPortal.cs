@@ -42,6 +42,7 @@ namespace Server.Portals
         /* When Game Net Portal starts script*/
         private void Start()
         {
+            Debug.Log("running game net portal start");
             /* On server started > attach the handlers*/
             NetworkManager.Singleton.OnServerStarted += HandleNetworkReady;
 
@@ -52,6 +53,7 @@ namespace Server.Portals
         /* When this script is destroyed*/
         private void OnDestroy()
         {
+            Debug.Log("running game net portal on destroy");
             /* Check if the network manager exists */
             if (NetworkManager.Singleton != null)
             {
@@ -74,19 +76,15 @@ namespace Server.Portals
 
         /* Call to start a host and register the client message handlers*/
         public async void StartHost()
+        
         {
+            Debug.Log("Starting the host...");
             if (RelayManager.Instance.IsRelayEnabled)
             {
 
                 await RelayManager.Instance.SetupRelay();
-                Debug.Log("relay setup");
             }
 
-            if (NetworkManager.Singleton.StartHost())
-                Debug.Log("Started Host");
-            else
-                Debug.Log("Failed to Start Host");
-            
             NetworkManager.Singleton.StartHost();
 
             RegisterClientMessageHandlers();
@@ -124,14 +122,17 @@ namespace Server.Portals
         /* When the server starts up */
         private void HandleNetworkReady()
         {
+            
+            Debug.Log("server has started up");
             /* Are we a host */
             if (NetworkManager.Singleton.IsHost)
             {
+                Debug.Log("running the on connection finished invoke");
                 /* Connection finished invoke with succesful status*/
                 OnConnectionFinished?.Invoke(ConnectStatus.Success);
             }
 
-            /*Users can run the method on this function at this point.*/
+            /* Users can run the method on this function at this point. */
 
             /* This callback binds to when the network is ready to service the client */
             OnNetworkReadied?.Invoke();
