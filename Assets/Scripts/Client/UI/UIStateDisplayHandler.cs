@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
@@ -23,7 +24,9 @@ public class UIStateDisplayHandler : NetworkBehaviour
 
     void Start()
     {
-        m_Camera = Camera.main;
+        var camera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineBrain>().OutputCamera;
+        Debug.Log(camera);
+        Camera m_Camera = camera;
         var canvasGameObject = GameObject.FindWithTag("GameCanvas");
         if (canvasGameObject)
         {
@@ -54,6 +57,7 @@ public class UIStateDisplayHandler : NetworkBehaviour
 
     void SpawnUIState()
     {
+        Debug.Log("SPAWNUISTATE");
         if (IsOwner)
         {
             m_UIState = Instantiate(m_UIStatePrefab, m_CanvasTransform);

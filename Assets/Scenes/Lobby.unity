@@ -292,6 +292,70 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 668916510, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 668916510, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 668916510, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 668916510, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4878933665215857037, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4878933665215857037, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 4878933665215857037, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4878933665215857037, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455294402268495087, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455294402268495087, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455294402268495087, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455294402268495087, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455294402268495087, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455294402268495087, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455294402268495087, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455294402268495087, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5455294402836979096, guid: da46a5194023500489e7630996eafdf1, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -344,6 +408,38 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 1014089931
       objectReference: {fileID: 0}
+    - target: {fileID: 5455294403257115155, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455294403257115155, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455294403257115155, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455294403257115155, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455294403532330994, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455294403532330994, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455294403532330994, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455294403532330994, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5455294403556772920, guid: da46a5194023500489e7630996eafdf1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -379,6 +475,22 @@ PrefabInstance:
     - target: {fileID: 5455294403614602507, guid: da46a5194023500489e7630996eafdf1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455294404405412223, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455294404405412223, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455294404405412223, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455294404405412223, guid: da46a5194023500489e7630996eafdf1, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da46a5194023500489e7630996eafdf1, type: 3}
