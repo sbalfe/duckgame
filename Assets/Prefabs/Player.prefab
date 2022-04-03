@@ -154,9 +154,10 @@ GameObject:
   - component: {fileID: -236909571003220791}
   - component: {fileID: 5816139541915836444}
   - component: {fileID: 5620985712727509488}
+  - component: {fileID: 6011197726261713932}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -436,6 +437,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BaseHP: 100
+  m_HitPoints:
+    m_InternalValue: 0
 --- !u!114 &5620985712727509488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,3 +451,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3231c8425e8a0d64da59b434f7cfb7c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6011197726261713932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6072259711416134337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ceb1d419a0125748956027c572ecc0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DisplayHealth: 1
+  m_UIStatePrefab: {fileID: 2222261590117128070, guid: f4ee6065cbecaf54fbeacc30bef6ca69, type: 3}
+  m_NetworkHealthState: {fileID: 5816139541915836444}

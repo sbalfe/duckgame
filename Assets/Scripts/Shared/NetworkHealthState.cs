@@ -9,7 +9,8 @@ public class NetworkHealthState : NetworkBehaviour
 
     public int BaseHP => m_BaseHP;
 
-    private NetworkVariable<int> m_HitPoints = new NetworkVariable<int>();
+    [HideInInspector]
+    public NetworkVariable<int> m_HitPoints = new NetworkVariable<int>();
 
     public int HitPoints
     {
@@ -32,7 +33,7 @@ public class NetworkHealthState : NetworkBehaviour
         m_HitPoints.OnValueChanged -= HitPointsChanged;
     }
 
-    void HitPointsChanged(int previousValue, int newValue)
+    public void HitPointsChanged(int previousValue, int newValue)
     {
         if (previousValue > 0 && newValue <= 0)
         {
@@ -42,7 +43,7 @@ public class NetworkHealthState : NetworkBehaviour
     }
 
     [ServerRpc]
-    void HitPointsDepletedServerRpc()
+    public void HitPointsDepletedServerRpc()
     {
         m_IsAlive.Value = false;
     }

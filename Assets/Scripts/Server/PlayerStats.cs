@@ -18,7 +18,6 @@ public class PlayerStats : NetworkBehaviour
 
     public ClientCharacterVisualization CharacterVisualization => m_CharacterVisualization;
 
-
     // Start is called before the first frame update
     void Start()
     {
